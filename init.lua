@@ -18,6 +18,8 @@ local lazyOptions = {
   lockfile = getlockfilepath(),
 }
 
+local settings = require 'config.extra.lazy'
+
 -- NOTE: this the lazy wrapper. Use it like require('lazy').setup() but with an extra
 -- argument, the path to lazy.nvim as downloaded by nix, or nil, before the normal arguments.
 require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 'lazy.nvim' }, {
@@ -47,4 +49,12 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
   },
   -- import/override with your plugins
   { import = 'plugins' },
+  spec = settings.spec,
+  -- Configure any other `lazy.nvim` configuration options here
+  ui = settings.ui,
+  performance = settings.performance,
+  checker = settings.checker,
+  default = settings.default,
 }, lazyOptions)
+
+require 'config.after'
